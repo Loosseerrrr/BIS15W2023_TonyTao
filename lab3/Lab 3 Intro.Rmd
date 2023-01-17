@@ -1,0 +1,62 @@
+---
+title: "Lab 3 Warmup"
+author: "Tony Tao"
+date: "2023-01-17"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Plant height
+```{r}
+Plant_height <- c(30.7, 37.6, 28.4, NA, 33.2)
+Plant_height
+```
+#Plant mass
+```{r}
+Plant_mass <- c(4, 5.2, 3.7, NA, 4.6)
+Plant_mass
+```
+#Lable the matrix
+```{r}
+samples <- c("plant1", "plant2", "plant3", "plant4", "plant5")
+measurement <- c("height", "mass")
+```
+
+#Combine data for height and mass
+```{r}
+Plant_experiment <- c(Plant_mass, Plant_height)
+```
+
+# Create the matrix
+
+```{r}
+Plant_matrix <- matrix(Plant_experiment, nrow = 5, byrow = F)
+Plant_matrix
+```
+
+#Name the matrix
+```{r}
+colnames(Plant_matrix) <- measurement
+rownames(Plant_matrix) <- samples
+Plant_matrix
+```
+
+#Calculate the mean
+```{r}
+Plant_means <- colMeans(Plant_matrix, na.rm = T)
+Plant_means
+```
+
+#Add the matrix
+```{r}
+Plant_matrix_final <- rbind(Plant_matrix, Plant_means)
+```
+
+#Final Work
+```{r}
+Plant_matrix_final
+```
+
