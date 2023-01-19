@@ -14,6 +14,5 @@ Played hockey for 6 years but gave up because heavy exam pressure in China. Star
 
 ## Wanna to Talk to me hah?
 Email: mxltao@ucdavis.edu
-Phone: 530-601-8632
 
 ## Hope we all have a great quarter! Enjoy ourselves in this course, and, **CHEER FOR PROF. LEDFORD!!**
