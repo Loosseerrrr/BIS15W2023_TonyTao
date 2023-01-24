@@ -99,8 +99,7 @@ is.integer(my_numeric) #is my_numeric an integer?
 ```
 
 ```{r}
-my_integer <- 
-  as.integer(my_numeric) #create a new object specified as an integer
+my_integer <- as.integer(my_numeric) #create a new object specified as an integer
 ```
 
 ```{r}
