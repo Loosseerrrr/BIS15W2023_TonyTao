@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2023-01-25" />
+<meta name="date" content="2023-01-26" />
 
 <title>dplyr Superhero</title>
 
@@ -1509,7 +1509,7 @@ border-radius: 0px;
 
 
 <h1 class="title toc-ignore">dplyr Superhero</h1>
-<h4 class="date">2023-01-25</h4>
+<h4 class="date">2023-01-26</h4>
 
 </div>
 
@@ -1535,7 +1535,8 @@ include a good mix of categorical and continuous data. Data taken from:
 can take care of them at the beginning. But, we should do this very
 cautiously. At times it is better to keep the original columns and data
 intact.</p>
-<pre class="r"><code>superhero_info &lt;- readr::read_csv(&quot;data/heroes_information.csv&quot;, na = c(&quot;&quot;, &quot;-99&quot;, &quot;-&quot;))</code></pre>
+<pre class="r"><code>setwd(&quot;/Users/manxiangling/Desktop/BIS15W2023_TonyTao/lab5/data&quot;)
+superhero_info &lt;- readr::read_csv(&quot;heroes_information.csv&quot;, na = c(&quot;&quot;, &quot;-99&quot;, &quot;-&quot;))</code></pre>
 <pre><code>## Rows: 734 Columns: 10
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
@@ -1544,7 +1545,8 @@ intact.</p>
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code>superhero_powers &lt;- readr::read_csv(&quot;data/super_hero_powers.csv&quot;, na = c(&quot;&quot;, &quot;-99&quot;, &quot;-&quot;))</code></pre>
+<pre class="r"><code>setwd(&quot;/Users/manxiangling/Desktop/BIS15W2023_TonyTao/lab5/data&quot;)
+superhero_powers &lt;- readr::read_csv(&quot;super_hero_powers.csv&quot;, na = c(&quot;&quot;, &quot;-99&quot;, &quot;-&quot;))</code></pre>
 <pre><code>## Rows: 667 Columns: 168
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
@@ -1885,24 +1887,26 @@ ratio?</li>
 </ol>
 <pre class="r"><code>superhero_info %&gt;% 
   mutate(height_weight_ratio = height/weight) %&gt;% 
-  arrange(desc(height_weight_ratio))</code></pre>
+  arrange(height_weight_ratio)</code></pre>
 <pre><code>## # A tibble: 734 × 11
 ##    name       gender eye_c…¹ race  hair_…² height publi…³ skin_…⁴ align…⁵ weight
 ##    &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt;
-##  1 Groot      Male   yellow  Flor… &lt;NA&gt;       701 Marvel… &lt;NA&gt;    good         4
-##  2 Galactus   Male   black   Cosm… Black      876 Marvel… &lt;NA&gt;    neutral     16
-##  3 Fin Fang … Male   red     Kaka… No Hair    975 Marvel… green   good        18
-##  4 Longshot   Male   blue    Human Blond      188 Marvel… &lt;NA&gt;    good        36
-##  5 Jack-Jack  Male   blue    Human Brown       71 Dark H… &lt;NA&gt;    good        14
-##  6 Rocket Ra… Male   brown   Anim… Brown      122 Marvel… &lt;NA&gt;    good        25
-##  7 Dash       Male   blue    Human Blond      122 Dark H… &lt;NA&gt;    good        27
-##  8 Howard th… Male   brown   &lt;NA&gt;  Yellow      79 Marvel… &lt;NA&gt;    good        18
-##  9 Swarm      Male   yellow  Muta… No Hair    196 Marvel… yellow  bad         47
-## 10 Yoda       Male   brown   Yoda… White       66 George… green   good        17
+##  1 Giganta    Female green   &lt;NA&gt;  Red       62.5 DC Com… &lt;NA&gt;    bad        630
+##  2 Utgard-Lo… Male   blue    Fros… White     15.2 Marvel… &lt;NA&gt;    bad         58
+##  3 Darkseid   Male   red     New … No Hair  267   DC Com… grey    bad        817
+##  4 Juggernaut Male   blue    Human Red      287   Marvel… &lt;NA&gt;    neutral    855
+##  5 Red Hulk   Male   yellow  Huma… Black    213   Marvel… red     neutral    630
+##  6 Sasquatch  Male   red     &lt;NA&gt;  Orange   305   Marvel… &lt;NA&gt;    good       900
+##  7 Hulk       Male   green   Huma… Green    244   Marvel… green   good       630
+##  8 Bloodaxe   Female blue    Human Brown    218   Marvel… &lt;NA&gt;    bad        495
+##  9 Thanos     Male   red     Eter… No Hair  201   Marvel… purple  bad        443
+## 10 A-Bomb     Male   yellow  Human No Hair  203   Marvel… &lt;NA&gt;    good       441
 ## # … with 724 more rows, 1 more variable: height_weight_ratio &lt;dbl&gt;, and
 ## #   abbreviated variable names ¹​eye_color, ²​hair_color, ³​publisher,
 ## #   ⁴​skin_color, ⁵​alignment</code></pre>
-<p>I am Groot! ## <code>superhero_powers</code> Have a quick look at the
+<pre class="r"><code>  #arrange(desc(height_weight_ratio))</code></pre>
+<p>Groot has the highest height to weight ratio. ##
+<code>superhero_powers</code> Have a quick look at the
 <code>superhero_powers</code> data frame.</p>
 <pre class="r"><code>glimpse(superhero_powers)</code></pre>
 <pre><code>## Rows: 667

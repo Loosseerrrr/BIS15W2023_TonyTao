@@ -1,6 +1,6 @@
 ---
 title: "dplyr Superhero"
-date: "2023-01-25"
+date: "2023-01-26"
 output:
   html_document: 
     theme: spacelab
@@ -32,7 +32,8 @@ These are data taken from comic books and assembled by fans. The include a good 
 Check out the way I am loading these data. If I know there are NAs, I can take care of them at the beginning. But, we should do this very cautiously. At times it is better to keep the original columns and data intact.  
 
 ```r
-superhero_info <- readr::read_csv("data/heroes_information.csv", na = c("", "-99", "-"))
+setwd("/Users/manxiangling/Desktop/BIS15W2023_TonyTao/lab5/data")
+superhero_info <- readr::read_csv("heroes_information.csv", na = c("", "-99", "-"))
 ```
 
 ```
@@ -48,7 +49,8 @@ superhero_info <- readr::read_csv("data/heroes_information.csv", na = c("", "-99
 
 
 ```r
-superhero_powers <- readr::read_csv("data/super_hero_powers.csv", na = c("", "-99", "-"))
+setwd("/Users/manxiangling/Desktop/BIS15W2023_TonyTao/lab5/data")
+superhero_powers <- readr::read_csv("super_hero_powers.csv", na = c("", "-99", "-"))
 ```
 
 ```
@@ -456,28 +458,32 @@ Because in those qualified heroes, some of them are both over 300 in height and 
 ```r
 superhero_info %>% 
   mutate(height_weight_ratio = height/weight) %>% 
-  arrange(desc(height_weight_ratio))
+  arrange(height_weight_ratio)
 ```
 
 ```
 ## # A tibble: 734 × 11
 ##    name       gender eye_c…¹ race  hair_…² height publi…³ skin_…⁴ align…⁵ weight
 ##    <chr>      <chr>  <chr>   <chr> <chr>    <dbl> <chr>   <chr>   <chr>    <dbl>
-##  1 Groot      Male   yellow  Flor… <NA>       701 Marvel… <NA>    good         4
-##  2 Galactus   Male   black   Cosm… Black      876 Marvel… <NA>    neutral     16
-##  3 Fin Fang … Male   red     Kaka… No Hair    975 Marvel… green   good        18
-##  4 Longshot   Male   blue    Human Blond      188 Marvel… <NA>    good        36
-##  5 Jack-Jack  Male   blue    Human Brown       71 Dark H… <NA>    good        14
-##  6 Rocket Ra… Male   brown   Anim… Brown      122 Marvel… <NA>    good        25
-##  7 Dash       Male   blue    Human Blond      122 Dark H… <NA>    good        27
-##  8 Howard th… Male   brown   <NA>  Yellow      79 Marvel… <NA>    good        18
-##  9 Swarm      Male   yellow  Muta… No Hair    196 Marvel… yellow  bad         47
-## 10 Yoda       Male   brown   Yoda… White       66 George… green   good        17
+##  1 Giganta    Female green   <NA>  Red       62.5 DC Com… <NA>    bad        630
+##  2 Utgard-Lo… Male   blue    Fros… White     15.2 Marvel… <NA>    bad         58
+##  3 Darkseid   Male   red     New … No Hair  267   DC Com… grey    bad        817
+##  4 Juggernaut Male   blue    Human Red      287   Marvel… <NA>    neutral    855
+##  5 Red Hulk   Male   yellow  Huma… Black    213   Marvel… red     neutral    630
+##  6 Sasquatch  Male   red     <NA>  Orange   305   Marvel… <NA>    good       900
+##  7 Hulk       Male   green   Huma… Green    244   Marvel… green   good       630
+##  8 Bloodaxe   Female blue    Human Brown    218   Marvel… <NA>    bad        495
+##  9 Thanos     Male   red     Eter… No Hair  201   Marvel… purple  bad        443
+## 10 A-Bomb     Male   yellow  Human No Hair  203   Marvel… <NA>    good       441
 ## # … with 724 more rows, 1 more variable: height_weight_ratio <dbl>, and
 ## #   abbreviated variable names ¹​eye_color, ²​hair_color, ³​publisher,
 ## #   ⁴​skin_color, ⁵​alignment
 ```
-I am Groot!
+
+```r
+  #arrange(desc(height_weight_ratio))
+```
+Groot has the highest height to weight ratio. 
 ## `superhero_powers`
 Have a quick look at the `superhero_powers` data frame.  
 

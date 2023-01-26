@@ -19,11 +19,13 @@ These are data taken from comic books and assembled by fans. The include a good 
 
 Check out the way I am loading these data. If I know there are NAs, I can take care of them at the beginning. But, we should do this very cautiously. At times it is better to keep the original columns and data intact.  
 ```{r}
-superhero_info <- readr::read_csv("data/heroes_information.csv", na = c("", "-99", "-"))
+setwd("/Users/manxiangling/Desktop/BIS15W2023_TonyTao/lab5/data")
+superhero_info <- readr::read_csv("heroes_information.csv", na = c("", "-99", "-"))
 ```
 
 ```{r}
-superhero_powers <- readr::read_csv("data/super_hero_powers.csv", na = c("", "-99", "-"))
+setwd("/Users/manxiangling/Desktop/BIS15W2023_TonyTao/lab5/data")
+superhero_powers <- readr::read_csv("super_hero_powers.csv", na = c("", "-99", "-"))
 ```
 
 ## Data tidy
@@ -136,9 +138,10 @@ Because in those qualified heroes, some of them are both over 300 in height and 
 ```{r}
 superhero_info %>% 
   mutate(height_weight_ratio = height/weight) %>% 
-  arrange(desc(height_weight_ratio))
+  arrange(height_weight_ratio)
+  #arrange(desc(height_weight_ratio))
 ```
-I am Groot!
+Groot has the highest height to weight ratio. 
 ## `superhero_powers`
 Have a quick look at the `superhero_powers` data frame.  
 ```{r}
