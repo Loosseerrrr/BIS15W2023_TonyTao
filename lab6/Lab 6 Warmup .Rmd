@@ -1,0 +1,37 @@
+---
+title: "Lab 6 Warmup"
+output: html_document
+date: "2023-01-26"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(janitor)
+```
+
+```{r}
+ecosphere <- readr::read_csv("data/ecs21351-sup-0003-SupplementS1.csv",skip = 2)
+ecosphere <- janitor::clean_names(ecosphere)
+glimpse(ecosphere)
+
+```
+
+```{r}
+#table(ecosphere$diet)
+ecosphere %>% 
+  tabyl(diet) %>% 
+  arrange(desc(n))
+```
+
+```{r}
+#filter(ecosphere, diet == "Vegetation")
+ecosphere %>% 
+  filter(diet == "Vegetation") %>% 
+  select(family, diet) %>% 
+  tabyl(diet)
+```
+
