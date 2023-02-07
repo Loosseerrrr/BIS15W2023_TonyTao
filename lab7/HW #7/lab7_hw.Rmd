@@ -18,10 +18,12 @@ Answer the following questions and complete the exercises in RMarkdown. Please e
 Make sure to use the formatting conventions of RMarkdown to make your report neat and clean!  
 
 ## Load the libraries
+ 
 ```{r message=FALSE, warning=FALSE}
 library(tidyverse)
 library(janitor)
 library(skimr)
+library(here)
 ``` 
 
 ## Data
@@ -32,7 +34,7 @@ Myhrvold N, Baldridge E, Chan B, Sivam D, Freeman DL, Ernest SKM (2015). “An a
 database to perform comparative analyses with birds, mammals, and reptiles.” _Ecology_, *96*, 3109.
 doi: 10.1890/15-0846.1 (URL: https://doi.org/10.1890/15-0846.1).
 ```{r}
-amniota <- readr::read_csv("data/amniota.csv")
+amniota <- readr::read_csv(here("lab7", "data", "amniota.csv"))
 ```
 
 `amphibio` data:  
