@@ -47,7 +47,14 @@ deserts %>%
 2. How many genera and species are represented in the data? What are the total number of observations? Which species is most/ least frequently sampled in the study?
 ```{r}
 deserts %>% 
-  count(genus)
+  summarize(n_genera = n_distinct(genus),
+            n_species = n_distinct(species),
+            n_total = n_distinct(record_id))
+```
+```{r}
+deserts %>% 
+  count(species_id) %>% 
+  top_n(5)
 ```
 
 3. What is the proportion of taxa included in this study? Show a table and plot that reflects this count.
