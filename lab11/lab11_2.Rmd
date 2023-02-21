@@ -42,7 +42,7 @@ options(scipen=999) #cancels the use of scientific notation for the session
 For this tutorial, we will use:  
 [Homerange](http://datadryad.org/resource/doi:10.5061/dryad.q5j65/1). The data are from: Tamburello N, Cote IM, Dulvy NK (2015) Energy and the scaling of animal space use. The American Naturalist 186(2):196-211. http://dx.doi.org/10.1086/682070.  
 ```{r message=FALSE, warning=FALSE}
-homerange <- read_csv(here("lab11", "data", "Tamburelloetal_HomeRangeDatabase.csv"))
+homerange <- read_csv(here("data", "Tamburelloetal_HomeRangeDatabase.csv"))
 ```
 
 ## ggplot themes
@@ -87,7 +87,7 @@ ls("package:ggthemes")[grepl("theme_", ls("package:ggthemes"))]
 ```
 
 ```{r}
-p+ theme_igray()+
+p+ theme_stata()+
   theme(legend.position = "bottom",
         axis.text.x = element_text(angle = 60, hjust=1))+
   labs(title = "Observations by Taxon in Homerange Data",
@@ -116,9 +116,10 @@ The [R Color Brewer](http://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3) w
 
 Here I chose the `Paired` palette. Take a moment and experiment with other options.
 ```{r}
-p+scale_fill_brewer(palette = "BuPu")+
+p+scale_fill_brewer(palette = "Paired")+
   theme(legend.position = "bottom",
-        axis.text.x = element_text(angle = 60, hjust=1))+
+        axis.text.x = element_text(angle = 60, hjust=1),
+        plot.title = element_text(hjust = 0.5))+
   labs(title = "Observations by Taxon in Homerange Data",
        x = NULL,
        y= "n",
@@ -133,7 +134,7 @@ colors <- paletteer::palettes_d_names
 
 Now we can display the palettes. Assign the palette to `my_palette` and then build this base R bar plot. There are a lot of options; `paleteer` is a collection of popular palettes. I really like the [`ggsci` package] (https://cran.r-project.org/web/packages/ggsci/vignettes/ggsci.html)
 ```{r}
-my_palette <- paletteer_d("ggprism::flames")
+my_palette <- paletteer_d("beyonce::X1")
 ```
 
 ```{r}
@@ -164,12 +165,36 @@ homerange %>%
 ## Practice
 1. Revisit the relationship between mass and homerange using a scatterplot, but color the points by taxonomic class using a custom color theme.
 ```{r}
-
+my_palette <- paletteer_d("ggsci::blue_material")
+homerange %>% 
+  ggplot(aes(x=log10.mass, y=log10.hra, color = taxon))+
+  geom_point(alpha = 0.6)+
+  scale_
+  theme_grey()
+  theme(legend.position = "top",
+        axis.text.x = element_text(hjust=1),
+        plot.title = element_text(hjust = 0.5))+
+  labs(title = "Mass vs. Homerange",
+       x = "Mass",
+       y= "Homerange",
+       fill= "taxon")+
+    scale_fil
 ```
 
 2. Build bar plots that show the representation by taxonomic class with carnivores and herbivores. Try using a color theme that matches your scatterplot to keep everything consistent.
 ```{r}
-
+homerange %>% 
+  ggplot(aes(x=class, fill = taxon))+
+  geom_bar(alpha = 0.6)+
+  scale_fill_manual(values=my_palette)+
+  theme_grey()
+  theme(legend.position = "top",
+        axis.text.x = element_text(hjust=1),
+        plot.title = element_text(hjust = 0.5))+
+  labs(title = "Mass vs. Homerange",
+       x = "Mass",
+       y= "Homerange",
+       fill= "taxon")
 ```
 
 ## Faceting
@@ -210,7 +235,7 @@ The problem is that the plot becomes very busy. It is hard to interpret with eac
 ecosphere %>% 
   ggplot(aes(x=diet, y=log10_mass, fill=migratory_strategy))+ 
   geom_boxplot(alpha=0.4) + 
-  facet_wrap(~migratory_strategy, ncol=4)+
+  facet_wrap(~migratory_strategy, ncol=3)+
   theme(axis.text.x = element_text(angle = 60, hjust = 1))+
   labs(title = "Mass by Diet and Migratory Strategy",
        x = NULL,
@@ -267,7 +292,16 @@ ecosphere %>%
 ## Practice
 1. Build a faceted plot that shows a distribution of life expectancy by habitat type.
 ```{r}
-
+ecosphere %>% 
+  ggplot(aes(x=log10_mass))+
+  geom_density()+
+  facet_wrap(~habitat)
+```
+```{r}
+ecosphere %>% 
+  ggplot(aes(x=log10_mass))+
+  geom_density()+
+  facet_grid(habitat~life_expectancy)
 ```
 
 2. Try the same plot as #1 above, but include life_expectancy~habitat.
