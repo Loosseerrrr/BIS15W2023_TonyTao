@@ -1,11 +1,11 @@
 ---
 title: "Lab 13 Homework"
-author: "Please Add Your Name Here"
+author: "Tony Tao"
 date: "`r Sys.Date()`"
 output:
-  html_document:
+  html_document: 
     theme: spacelab
-    toc: no
+    keep_md: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -22,12 +22,13 @@ Make sure to use the formatting conventions of RMarkdown to make your report nea
 library(tidyverse)
 library(shiny)
 library(shinydashboard)
+library(here)
 ```
 
 ## Data
 The data for this assignment come from the [University of California Information Center](https://www.universityofcalifornia.edu/infocenter). Admissions data were collected for the years 2010-2019 for each UC campus. Admissions are broken down into three categories: applications, admits, and enrollees. The number of individuals in each category are presented by demographic.  
 ```{r}
-UC_admit <- readr::read_csv("data/UC_admit.csv")
+UC_admit <- readr::read_csv(here("lab12", "data", "UC_admit.csv"))
 ```
 
 **1. Use the function(s) of your choice to get an idea of the overall structure of the data frame, including its dimensions, column names, variable classes, etc. As part of this, determine if there are NA's and how they are treated.**  
@@ -56,7 +57,7 @@ ui <- dashboardPage(
               selected = "Applicants")
   ), # close the first box
   box(title = "UC Admissions", width = 7,
-  plotOutput("plot", width = "600px", height = "500px")
+  plotOutput("plot", width = "700px", height = "500px")
   ) # close the second box
   ) # close the row
   ) # close the dashboard body
@@ -99,8 +100,8 @@ ui <- dashboardPage(
   radioButtons("y", "Select Ethnicity", choices = c("International", "Unknown", "White", "Asian", "Chicano/Latino", "American Indian", "African American"),
               selected = "International")
   ), # close the first box
-  box(title = "UC Admissions", width = 7,
-  plotOutput("plot", width = "600px", height = "500px")
+  box(title = "UC Admissions", width = 5,
+  plotOutput("plot", width = "700px", height = "500px")
   ) # close the second box
   ) # close the row
   ) # close the dashboard body
@@ -132,7 +133,7 @@ Reference: Koerner SE, Poulsen JR, Blanchard EJ, Okouyi J, Clark CJ. Vertebrate 
 
 1. Load `IvindoData_DryadVersion.csv` and use the function(s) of your choice to get an idea of the overall structure, including its dimensions, column names, variable classes, etc. As part of this, determine if NA's are present and how they are treated.
 ```{r}
-gabon <- readr::read_csv("data/IvindoData_DryadVersion.csv")
+gabon <- readr::read_csv(here("lab12", "data", "IvindoData_DryadVersion.csv"))
 ```
 
 ```{r}
@@ -179,6 +180,68 @@ server <- function(input, output, session) {
 
 shinyApp(ui, server)
 ```
+3. Practices from 12_2
+
+1) Start by loading and exploring the data.
+```{r}
+wolves <- read_csv(here("lab12", "data", "wolves_data", "wolves_dataset.csv"))
+```
+
+```{r}
+names(wolves)
+```
+
+```{r}
+glimpse(wolves)
+```
+
+2) For the app, here is a faceted version of what we are looking for. We want the reactive part to be `pop` and you should use `shinydashboard`.
+```{r}
+wolves %>% 
+  filter(sex!="NA") %>% 
+  ggplot(aes(x=sex, fill=sex))+
+  geom_bar()+
+  facet_wrap(~pop)
+```
+
+
+```{r}
+ui <- dashboardPage(
+  dashboardHeader(title = "Sex Distribution"),
+  dashboardSidebar(disable = T),
+  dashboardBody(
+  fluidRow(
+  box(title = "Plot Options", width = 3,
+  selectInput("x", "Select Pop", choices = c("AK.PEN", "BAN.JAS", "BC", "DENALI", "ELLES", "GTNP", "INT.AK", "MEXICAN", "MI", "MT", "N.NWT", "ONT", "SE.AK", "SNF", "SS.NWT", "YNP", "YUCH"), 
+              selected = "AK.PEN"),
+  ), # close the first box
+  box(title = "Count Distribution", width = 3,
+  plotOutput("plot", width = "600px", height = "500px")
+  ) # close the second box
+  ) # close the row
+  ) # close the dashboard body
+) # close the ui
+
+server <- function(input, output, session) { 
+  
+  output$plot <- renderPlot({
+  wolves %>% 
+  filter(sex != "NA") %>% 
+  filter(pop == input$x) %>% 
+  ggplot(aes_string(x = "sex", fill = "sex")) +
+  geom_bar(alpha = 0.6, color = "black")+
+  theme_light(base_size = 18)+
+  labs(x = "Sex",
+       y = NULL)
+  })
+  
+  # stop the app when we close it
+  session$onSessionEnded(stopApp)
+  }
+
+shinyApp(ui, server)
+```
+
 
 ## Push your final code to GitHub!
 Please be sure that you check the `keep md` file in the knit preferences. 
