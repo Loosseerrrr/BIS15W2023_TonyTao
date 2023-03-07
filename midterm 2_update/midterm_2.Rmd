@@ -168,7 +168,7 @@ surgery_2
 10. (4 points) Make a plot that visualizes the chart from question #9. Make sure that the months are on the x-axis. Do a search online and figure out how to order the months Jan-Dec.
 
 ```{r}
-surgery_2 %>% 
+surgery_1 %>% 
   ggplot(aes(x=month, y=mort))+
   geom_col()+
   theme_linedraw()+

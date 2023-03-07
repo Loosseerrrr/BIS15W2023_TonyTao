@@ -76,7 +76,7 @@ bbox <- make_bbox(long, lat, f = 0.05)
 
 Let's get a base map for our bounding box area. We will use the stamen maps because they are free. There are several different map types, including: `terrain-labels`, `terrain-lines`, `toner`, `toner-2011`, `toner-background`, `toner-hybrid`, `toner-lines`, `toner-lite`, and `watercolor.`
 ```{r}
-map1 <- get_map(bbox, maptype = "toner-hybrid", source = "stamen")
+map1 <- get_map(bbox, maptype = "terrain-labels", source = "stamen")
 ```
 
 ```{r}
@@ -106,6 +106,7 @@ grizzly %>%
   select(longitude, latitude) %>% 
   summary()
 ```
+
 ```{r}
 lati <- c(-166.2, -131.3)
 longi <- c(55.02, 70.37)
